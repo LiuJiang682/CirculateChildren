@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -158,5 +159,27 @@ public class CirculateArrayTest {
 		assertNotNull(integer);
 		assertTrue(integer.isPresent());
 		assertTrue(2 == integer.get());
+	}
+	
+	/**
+	 * Given 2 positive number 
+	 * When the remove method called
+	 * Then the 2 integers has been remove from the start of array
+	 */
+	@Test
+	public void when2IndexProvidedThenAnIntegerShouldReturn() {
+		//Given a 3
+		int index = 3;
+		//When the remove method called
+		Optional<Integer> integer = this.testInstance.remove(index);
+		//Then the integer should remove from array
+		assertNotNull(integer);
+		assertTrue(integer.isPresent());
+		assertTrue(3 == integer.get());
+		index = 8;
+		Optional<Integer> integer2 = this.testInstance.remove(index);
+		assertNotNull(integer2);
+		assertTrue(integer2.isPresent());
+		assertTrue(4 == integer2.get());
 	}
 }
