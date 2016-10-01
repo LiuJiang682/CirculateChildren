@@ -33,4 +33,7 @@ public class CirculateArray {
 		return result;
 	}
 
+	public int size() {
+		return this.array.size();
+	}
 }

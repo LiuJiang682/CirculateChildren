@@ -9,7 +9,6 @@ import java.util.Optional;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -176,10 +175,12 @@ public class CirculateArrayTest {
 		assertNotNull(integer);
 		assertTrue(integer.isPresent());
 		assertTrue(3 == integer.get());
+		assertTrue(5 == this.testInstance.size());
 		index = 8;
 		Optional<Integer> integer2 = this.testInstance.remove(index);
 		assertNotNull(integer2);
 		assertTrue(integer2.isPresent());
 		assertTrue(4 == integer2.get());
+		assertTrue(4 == this.testInstance.size());
 	}
 }
