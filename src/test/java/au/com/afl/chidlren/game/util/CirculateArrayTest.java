@@ -2,8 +2,13 @@ package au.com.afl.chidlren.game.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.Optional;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -13,6 +18,18 @@ import org.junit.Test;
  */
 public class CirculateArrayTest {
 
+	private CirculateArray testInstance;
+	
+	@Before
+	public void setUp() {
+		this.testInstance = new CirculateArray(6);
+	}
+	
+	@After
+	public void tearDown() {
+		this.testInstance = null;
+	}
+	
 	/**
 	 * Given the user can access to the class
 	 * When the constructor called
@@ -22,7 +39,6 @@ public class CirculateArrayTest {
 	public void whenTheConstructorCalledThenObjectShouldReturn() {
 		//Given the user can access the the class
 		//When the constructor called
-		CirculateArray testInstance = new CirculateArray(6);
 		//Then the object should return
 		assertNotNull(testInstance);
 	}
@@ -69,5 +85,78 @@ public class CirculateArrayTest {
 			assertNotNull(message);
 			assertEquals("Illegal size argument: 0, must be greater than zero!", message);
 		}
+	}
+	
+	/**
+	 * Given a negative number
+	 * When the remove method called
+	 * Then an illegalArgumentException should be raised
+	 */
+	@Test
+	public void whenTheNegativeNumberProvidedWithRemoveMethodThenExceptionRaised() {
+		//Given a negative number
+		int size = -1;
+		//When the remove method called
+		try { 
+			this.testInstance.remove(size);
+			fail("Program reached unexpected point!");
+		}
+		catch (IllegalArgumentException iae) {
+			//Then the exception should raised
+			String message = iae.getMessage();
+			assertNotNull(message);
+			assertEquals("Illegal index argument: -1, must be greater than zero!", message);
+		}
+	}
+	
+	/**
+	 * Given a positive number
+	 * When the remove method called
+	 * Then the integer has been remove from the array
+	 */
+	@Test
+	public void whenAPositiveIndexProvidedThenAnIntegerShouldReturn() {
+		//Given a positive number
+		int index = 3;
+		//When the remove method called
+		Optional<Integer> integer = this.testInstance.remove(index);
+		//Then the integer should remove from array
+		assertNotNull(integer);
+		assertTrue(integer.isPresent());
+		assertTrue(3 == integer.get());
+	}
+	
+	/**
+	 * Given a positive number greater then the size
+	 * When the remove method called
+	 * Then the integer has been remove from the start of array
+	 */
+	@Test
+	public void whenAPositiveIndexGTSizeProvidedThenAnIntegerShouldReturn() {
+		//Given a 7
+		int index = 7;
+		//When the remove method called
+		Optional<Integer> integer = this.testInstance.remove(index);
+		//Then the integer should remove from array
+		assertNotNull(integer);
+		assertTrue(integer.isPresent());
+		assertTrue(1 == integer.get());
+	}
+	
+	/**
+	 * Given a positive number 8
+	 * When the remove method called
+	 * Then the 2 has been remove from the start of array
+	 */
+	@Test
+	public void whenAPositive2ProvidedThenAnIntegerShouldReturn() {
+		//Given a 8
+		int index = 8;
+		//When the remove method called
+		Optional<Integer> integer = this.testInstance.remove(index);
+		//Then the integer should remove from array
+		assertNotNull(integer);
+		assertTrue(integer.isPresent());
+		assertTrue(2 == integer.get());
 	}
 }
