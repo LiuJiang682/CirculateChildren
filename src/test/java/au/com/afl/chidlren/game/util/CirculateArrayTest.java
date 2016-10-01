@@ -119,11 +119,32 @@ public class CirculateArrayTest {
 		//Given a positive number
 		int index = 3;
 		//When the remove method called
-		Optional<Integer> integer = this.testInstance.remove(index);
+		Optional<Integer[]> integer = this.testInstance.remove(index);
 		//Then the integer should remove from array
 		assertNotNull(integer);
 		assertTrue(integer.isPresent());
-		assertTrue(3 == integer.get());
+		Integer[] result = integer.get();
+		assertTrue(3 == result[0]);
+		assertTrue(3 == result[1]);
+	}
+	
+	/**
+	 * Given a positive number equals to the size
+	 * When the remove method called
+	 * Then the integer has been remove from the end of array
+	 */
+	@Test
+	public void whenAPositiveIndexEqSizeProvidedThenAnIntegerShouldReturn() {
+		//Given a 6
+		int index = 6;
+		//When the remove method called
+		Optional<Integer[]> integer = this.testInstance.remove(index);
+		//Then the integer should remove from array
+		assertNotNull(integer);
+		assertTrue(integer.isPresent());
+		Integer[] result = integer.get();
+		assertTrue(6 == result[0]);
+		assertTrue(6 == result[1]);
 	}
 	
 	/**
@@ -136,11 +157,13 @@ public class CirculateArrayTest {
 		//Given a 7
 		int index = 7;
 		//When the remove method called
-		Optional<Integer> integer = this.testInstance.remove(index);
+		Optional<Integer[]> integer = this.testInstance.remove(index);
 		//Then the integer should remove from array
 		assertNotNull(integer);
 		assertTrue(integer.isPresent());
-		assertTrue(1 == integer.get());
+		Integer[] result = integer.get();
+		assertTrue(1 == result[0]);
+		assertTrue(1 == result[1]);
 	}
 	
 	/**
@@ -153,11 +176,13 @@ public class CirculateArrayTest {
 		//Given a 8
 		int index = 8;
 		//When the remove method called
-		Optional<Integer> integer = this.testInstance.remove(index);
+		Optional<Integer[]> integer = this.testInstance.remove(index);
 		//Then the integer should remove from array
 		assertNotNull(integer);
 		assertTrue(integer.isPresent());
-		assertTrue(2 == integer.get());
+		Integer[] result = integer.get();
+		assertTrue(2 == result[0]);
+		assertTrue(2 == result[1]);
 	}
 	
 	/**
@@ -170,17 +195,21 @@ public class CirculateArrayTest {
 		//Given a 3
 		int index = 3;
 		//When the remove method called
-		Optional<Integer> integer = this.testInstance.remove(index);
+		Optional<Integer[]> integer = this.testInstance.remove(index);
 		//Then the integer should remove from array
 		assertNotNull(integer);
 		assertTrue(integer.isPresent());
-		assertTrue(3 == integer.get());
+		Integer[] result = integer.get();
+		assertTrue(3 == result[0]);
+		assertTrue(3 == result[1]);
 		assertTrue(5 == this.testInstance.size());
 		index = 8;
-		Optional<Integer> integer2 = this.testInstance.remove(index);
+		Optional<Integer[]> integer2 = this.testInstance.remove(index);
 		assertNotNull(integer2);
 		assertTrue(integer2.isPresent());
-		assertTrue(4 == integer2.get());
+		Integer[] result2 = integer2.get();
+		assertTrue(4 == result2[0]);
+		assertTrue(3 == result2[1]);
 		assertTrue(4 == this.testInstance.size());
 	}
 }

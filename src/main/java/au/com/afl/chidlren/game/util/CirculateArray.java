@@ -3,14 +3,15 @@ package au.com.afl.chidlren.game.util;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import au.com.afl.chidlren.game.constants.Constants.Numeric;
+
 public class CirculateArray {
 
-	private static final int ONE = 1;
-	private static final int ZERO = 0;
+	public static final int ZERO = 0;
 	private ArrayList<Integer> array;
 	
 	public CirculateArray(int size) {
-		if (size < ONE) {
+		if (size < Numeric.ONE) {
 			throw new IllegalArgumentException("Illegal size argument: " + size + ", must be greater than zero!");
 		}
 		this.array = new ArrayList<>(size);
@@ -19,16 +20,27 @@ public class CirculateArray {
 		}
 	}
 
-	public Optional<Integer> remove(int index) {
+	public Optional<Integer[]> remove(int index) {
 		if (index < ZERO) {
 			throw new IllegalArgumentException("Illegal index argument: " + index + ", must be greater than zero!");
 		}
 		
-		Optional<Integer> result = Optional.empty();
+		Optional<Integer[]> result = Optional.empty();
 		if (ZERO < this.array.size()) {
-			int position = (ZERO == index) ? index : index % this.array.size() - ONE;
+			int position = index;
+			int mod = index % this.array.size();
+			if (Numeric.ZERO != index) {
+				if (ZERO == mod) {
+					position = this.array.size();
+				}
+				else {
+					position = mod;
+				}
+				position -= Numeric.ONE;
+			}
 			Integer integer = this.array.remove(position);
-			result = Optional.of(integer);
+			Integer[] removeAndPos = {integer, position + Numeric.ONE};
+			result = Optional.of(removeAndPos);
 		}
 		return result;
 	}
